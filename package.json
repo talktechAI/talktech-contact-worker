@@ -1,0 +1,20 @@
+{
+  "name": "talktech-contact-worker",
+  "version": "1.0.0",
+  "description": "Contact form webhook handler with D1 database storage",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "create-db": "wrangler d1 create talktech-db",
+    "init-db": "wrangler d1 execute talktech-db --local --file=./schema.sql",
+    "init-db-remote": "wrangler d1 execute talktech-db --file=./schema.sql"
+  },
+  "keywords": ["cloudflare", "worker", "d1", "contact-form"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
