@@ -12,7 +12,7 @@ export default {
         
         return Response.json({
           status: 'healthy',
-          worker: 'talktech-contact-webhook',
+          worker: 'contactworker',
           database: 'connected',
           totalContacts: results[0]?.count || 0,
           timestamp: new Date().toISOString()
@@ -20,7 +20,7 @@ export default {
       } catch (error) {
         return Response.json({
           status: 'healthy',
-          worker: 'talktech-contact-webhook',
+          worker: 'contactworker',
           database: 'not initialized',
           message: 'Run database migrations first'
         });
