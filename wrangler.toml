@@ -1,13 +1,13 @@
 # wrangler.toml - Worker configuration
-name = "talktech-contact-webhook"
+name = "contactworker"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
 
 # D1 Database binding
 [[d1_databases]]
 binding = "DB"
-database_name = "talktech-contact-db"
-database_id = "YOUR-DATABASE-ID"  # You'll get this after creating the database
+database_name = "talktech-db"
+database_id = "605da4e8-9f81-4560-b9dd-e47d590ba221"  # You'll get this after creating the database
 
 # Environment variables (secrets should be added via CLI, not here)
 [vars]

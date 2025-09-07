@@ -1,5 +1,5 @@
 {
-  "name": "talktech-contact-worker",
+  "name": "contactworker",
   "version": "1.0.0",
   "description": "Contact form webhook handler with D1 database storage",
   "main": "src/index.js",
