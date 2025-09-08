@@ -1,20 +1,66 @@
-# wrangler.toml - Worker configuration
+# ===============================
+# TALKTECH CONTACT WORKER
+# ===============================
 name = "contactworker"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
 
-# D1 Database binding
-[[d1_databases]]
-binding = "DB"
-database_name = "talktech-db"
-database_id = "605da4e8-9f81-4560-b9dd-e47d590ba221"  # You'll get this after creating the database
+# Optional but helpful for debugging in the dashboard
+[observability]
+enabled = true
 
-# Environment variables (secrets should be added via CLI, not here)
-[vars]
-# Non-secret variables can go here
-ENVIRONMENT = "production"
+# If you want a custom domain route instead of workers.dev, uncomment:
+# routes = [
+#   { pattern = "api.talktech.io/contact", zone_name = "talktech.io" }
+# ]
 
-# Development settings
+# -------------------------------
+# GLOBAL DEV SETTINGS (local)
+# -------------------------------
 [dev]
 port = 8787
 local_protocol = "http"
+
+# ===============================
+# PRODUCTION ENV
+# ===============================
+[env.production.vars]
+# Plain-text, safe config (NO secrets here)
+ENVIRONMENT = "production"
+
+# If your Worker adds CORS headers, define the allowed origin(s):
+CORS_ALLOW_ORIGIN = "https://talktech.io"
+
+# Optional knobs if you add rate-limiting in Worker code:
+RATE_LIMIT_WINDOW_SECS = "60"
+RATE_LIMIT_MAX = "5"
+
+# D1 binding (MUST match your code's env.DB)
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "talktech-db"
+# Keep the ID you already have; verify it's correct in your account
+database_id = "605da4e8-9f81-4560-b9dd-e47d590ba221"
+
+# After you create the namespace via CLI, paste the ID here.
+# [[env.production.kv_namespaces]]
+# binding = "RATE_KV"
+# id = "PASTE-KV-ID"
+
+# ===============================
+# PREVIEW / STAGING ENV
+# ===============================
+[env.preview.vars]
+ENVIRONMENT = "preview"
+CORS_ALLOW_ORIGIN = "https://talktech.pages.dev"   # adjust if needed
+RATE_LIMIT_WINDOW_SECS = "60"
+RATE_LIMIT_MAX = "10"
+
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "talktech-db"
+database_id = "605da4e8-9f81-4560-b9dd-e47d590ba221"
+
+# [[env.preview.kv_namespaces]]
+# binding = "RATE_KV"
+# id = "PASTE-KV-ID"
